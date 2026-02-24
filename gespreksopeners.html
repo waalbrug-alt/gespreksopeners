@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 Gespreksopeners — Voor Managers</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f5f0e8;
+    --accent: #c8401b;
+    --accent-light: #f0d5cc;
+    --muted: #6b6560;
+    --divider: #d9d3c7;
+    --card-bg: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .cover-left {
+    background: var(--ink);
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .cover-left::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -40px; bottom: 0;
+    width: 80px;
+    background: var(--ink);
+    clip-path: polygon(0 0, 50% 0, 100% 50%, 50% 100%, 0 100%);
+    z-index: 2;
+  }
+
+  .cover-right {
+    background: var(--paper);
+    padding: 80px 80px 80px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .cover-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.07);
+    line-height: 1;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    user-select: none;
+  }
+
+  .cover-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    position: relative;
+    z-index: 3;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #fff;
+    position: relative;
+    z-index: 3;
+    margin: auto 0;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .cover-bottom {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .cover-right h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  .cover-right p {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    max-width: 360px;
+  }
+
+  .cover-tagline {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--divider);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    background: var(--accent);
+    padding: 80px 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    page-break-after: always;
+  }
+
+  .intro-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .intro-left p {
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .intro-right {
+    background: rgba(255,255,255,0.12);
+    border-radius: 2px;
+    padding: 40px;
+  }
+
+  .intro-right h3 {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 24px;
+  }
+
+  .intro-list li {
+    list-style: none;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .intro-list li::before {
+    content: '→';
+    color: rgba(255,255,255,0.4);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── QUESTIONS GRID ── */
+  .questions-section {
+    padding: 80px 60px;
+    background: var(--paper);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-header .overline {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .questions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--divider);
+    border: 2px solid var(--divider);
+  }
+
+  .q-card {
+    background: var(--card-bg);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .q-card:hover {
+    background: #fafaf8;
+  }
+
+  .q-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+
+  .q-card:hover::before {
+    transform: scaleY(1);
+  }
+
+  .q-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: rgba(200, 64, 27, 0.08);
+    line-height: 1;
+    position: absolute;
+    top: 16px;
+    right: 24px;
+  }
+
+  .q-type {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .q-question {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .q-question::before {
+    content: '"';
+    color: var(--accent);
+    font-size: 32px;
+    line-height: 0;
+    vertical-align: -12px;
+    margin-right: 4px;
+  }
+
+  .q-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .q-meta-block h4 {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .q-meta-block p {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .q-action {
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .q-action strong {
+    color: var(--accent);
+    font-weight: 500;
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  /* ── TAGS ── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .tag {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  /* ── QUICK START ── */
+  .quickstart {
+    background: var(--ink);
+    padding: 80px 100px;
+    page-break-before: always;
+  }
+
+  .quickstart-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .quickstart .overline {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .quickstart h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 40px;
+  }
+
+  .quickstart h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 60px;
+  }
+
+  .step {
+    background: rgba(255,255,255,0.05);
+    padding: 32px 24px;
+    text-align: left;
+  }
+
+  .step-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .step p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+  }
+
+  .closing-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    max-width: 500px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 40px;
+  }
+
+  /* ── WHAT'S NEXT ── */
+  .whatsnext {
+    background: var(--paper);
+    padding: 80px 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .whatsnext h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .whatsnext p {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .whatsnext-items {
+    margin-top: 12px;
+  }
+
+  .whatsnext-item {
+    border-top: 1px solid var(--divider);
+    padding: 20px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .whatsnext-item-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .whatsnext-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .whatsnext-item p {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .final-cta {
+    background: var(--accent);
+    padding: 40px;
+    margin-top: 40px;
+  }
+
+  .final-cta p {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .final-cta em {
+    font-style: italic;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    margin-top: 8px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; }
+    .cover { page-break-after: always; }
+    .intro { page-break-after: always; }
+    .questions-grid { page-break-inside: avoid; }
+    .q-card { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 800px) {
+    .cover, .intro, .whatsnext { grid-template-columns: 1fr; }
+    .cover-left::after { display: none; }
+    .cover-right { padding: 60px 40px; }
+    .cover-left { padding: 60px 40px; }
+    .questions-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .questions-section, .quickstart, .intro, .whatsnext { padding: 60px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-left">
+    <span class="cover-number">10</span>
+    <span class="cover-label">Voor managers &amp; leidinggevenden</span>
+    <h1 class="cover-title">
+      Gespreks&shy;<em>openers</em><br>die echt<br>werken
+    </h1>
+    <p class="cover-bottom">Vertrouwen · Verbinding · Beweging</p>
+  </div>
+  <div class="cover-right">
+    <h2>"Echte beweging ontstaat in gesprekken waar iemand zich gezien voelt."</h2>
+    <p>De meeste gesprekken op de werkvloer zijn functioneel. Kort. Taakgericht. Efficiënt.</p>
+    <p>Maar wat als één vraag het verschil maakt?</p>
+    <p>Deze 10 gespreksopeners zijn niet uit theorie ontstaan — maar uit moeilijke gesprekken. Stiltes. Weerstand. Doorbraken.</p>
+    <div class="cover-tagline">Direct toepasbaar · Vandaag nog</div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-left">
+    <h2>Wat je in deze gids vindt</h2>
+    <p>Geen trucjes. Geen scripts. Wel vragen die ruimte openen en mensen in beweging brengen.</p>
+    <p>Per opener: de vraag zelf, waarom hij werkt, wanneer je hem inzet, en wat je daarna doet (en niet doet).</p>
+  </div>
+  <div class="intro-right">
+    <h3>Elke opener bevat</h3>
+    <ul class="intro-list">
+      <li>De exacte vraag die je kunt stellen</li>
+      <li>Waarom deze vraag psychologisch werkt</li>
+      <li>De juiste context en momenten om hem te gebruiken</li>
+      <li>Wat je daarna doet — inclusief wat je <em>niet</em> moet doen</li>
+    </ul>
+  </div>
+</section>
+
+<!-- QUESTIONS -->
+<section class="questions-section">
+  <div class="section-header">
+    <span class="overline">De 10 openers</span>
+    <h2>Kies er één. Begin vandaag.</h2>
+  </div>
+
+  <div class="questions-grid">
+
+    <!-- 1 -->
+    <div class="q-card">
+      <span class="q-number">01</span>
+      <span class="q-type">De check-in vraag</span>
+      <p class="q-question">Hoe gaat het écht met je vandaag?</p>
+      <div class="tags">
+        <span class="tag">Start van dienst</span>
+        <span class="tag">1-op-1</span>
+        <span class="tag">Spannende periodes</span>
+      </div>
+      <div class="q-meta">
+        <div class="q-meta-block">
+          <h4>Waarom het werkt</h4>
+          <p>Mensen verwachten deze vraag niet zonder agenda. Het vertraagt het gesprek en nodigt uit tot eerlijkheid.</p>
+        </div>
+      </div>
+      <div class="q-action"><strong>Wat je daarna doet</strong>Stilte laten vallen. Niet oplossen. Alleen luisteren.</div>
+    </div>
+
+    <!-- 2 -->
+    <div class="q-card">
+      <span class="q-number">02</span>
+      <span class="q-type">De betekenisvraag</span>
+      <p class="q-question">Wat kost je momenteel de meeste energie in je werk?</p>
+      <div class="tags">
+        <span class="tag">Werkdruk</span>
+        <span class="tag">Verzuimgesprekken</span>
+        <span class="tag">Teamreflectie</span>
+      </div>
+      <div class="q-meta">
+        <div class="q-meta-block">
+          <h4>Waarom het werkt</h4>
+          <p>Energieverlies is vaak de échte oorzaak achter verzuim en frustratie.</p>
+        </div>
+      </div>
+      <div class="q-action"><strong>Wat je daarna doet</strong>Doorvragen met: "Wat zou het 10% lichter maken?"</div>
+    </div>
+
+    <!-- 3 -->
+    <div class="q-card">
+      <span class="q-number">03</span>
+      <span class="q-type">De waarderingsvraag</span>
+      <p class="q-question">Waar ben je de afgelopen week trots op?</p>
+      <div class="tags">
+        <span class="tag">Teamoverleg</span>
+        <span class="tag">Coaching</span>
+        <span class="tag">Reflectiemoment</span>
+      </div>
+      <div class="q-meta">
+        <div class="q-meta-block">
+          <h4>Waarom het werkt</h4>
+          <p>Teams praten zelden over wat goed gaat. Verschuift focus naar eigenaarschap.</p>
+        </div>
+      </div>
+      <div class="q-action"><strong>Wat je daarna doet</strong>Succes expliciet benoemen. Klein houden. Echt maken.</div>
+    </div>
+
+    <!-- 4 -->
+    <div class="q-card">
+      <span class="q-number">04</span>
+      <span class="q-type">De frictievraag</span>
+      <p class="q-question">Wat irriteert je momenteel, maar spreek je niet uit?</p>
+      <div class="tags">
+        <span class="tag">Spanningen</span>
+        <span class="tag">Verandering</span>
+        <span class="tag">Evaluaties</span>
+      </div>
+      <div class="q-meta">
+        <div class="q-meta-block">
+          <h4>Waarom het werkt</h4>
+          <p>Onuitgesproken irritaties worden cultuurproblemen. Normaliseert frictie.</p>
+        </div>
+      </div>
+      <div class="q-action"><strong>Wat je daarna doet</strong>Niet verdedigen. Samenvatten. Bedanken.</div>
+    </div>
+
+    <!-- 5 -->
+    <div class="q-card">
+      <span class="q-number">05</span>
+      <span class="q-type">De ontwikkelvraag</span>
+      <p class="q-question">Wat wil je dit jaar leren dat we nog niet bespreken?</p>
+      <div class="tags">
+        <span class="tag">Jaargesprekken</span>
+        <span class="tag">Coaching</span>
+        <span class="tag">Loopbaan</span>
+      </div>
+      <div class="q-meta">
+        <div class="q-meta-block">
+          <h4>Waarom het werkt</h4>
+          <p>Laat zien dat iemand meer is dan zijn functie. Versterkt autonomie.</p>
+        </div>
+      </div>
+      <div class="q-action"><strong>Wat je daarna doet</strong>Eén kleine stap concreet maken.</div>
+    </div>
+
+    <!-- 6 -->
+    <div class="q-card">
+      <span class="q-number">06</span>
+      <span class="q-type">De signaalvraag</span>
+      <p class="q-question">Wanneer merk jij dat het minder goed met je gaat op werk?</p>
+      <div class="tags">
+        <span class="tag">Preventief verzuim</span>
+        <span class="tag">Coaching</span>
+        <span class="tag">Werkdruk</span>
+      </div>
+      <div class="q-meta">
+        <div class="q-meta-block">
+          <h4>Waarom het werkt</h4>
+          <p>Vergroot zelfinzicht en voorkomt escalatie.</p>
+        </div>
+      </div>
+      <div class="q-action"><strong>Wat je daarna doet</strong>Samen signalen benoemen en vastleggen.</div>
+    </div>
+
+    <!-- 7 -->
+    <div class="q-card">
+      <span class="q-number">07</span>
+      <span class="q-type">De teamvraag</span>
+      <p class="q-question">Wat helpt jou om je veilig te voelen in dit team?</p>
+      <div class="tags">
+        <span class="tag">Teamontwikkeling</span>
+        <span class="tag">Nieuwe teams</span>
+        <span class="tag">Na incidenten</span>
+      </div>
+      <div class="q-meta">
+        <div class="q-meta-block">
+          <h4>Waarom het werkt</h4>
+          <p>Psychologische veiligheid wordt concreet en bespreekbaar.</p>
+        </div>
+      </div>
+      <div class="q-action"><strong>Wat je daarna doet</strong>Patronen teruggeven aan het team.</div>
+    </div>
+
+    <!-- 8 -->
+    <div class="q-card">
+      <span class="q-number">08</span>
+      <span class="q-type">De veranderingsvraag</span>
+      <p class="q-question">Wat maakt deze verandering lastig voor jou?</p>
+      <div class="tags">
+        <span class="tag">Implementaties</span>
+        <span class="tag">Transities</span>
+        <span class="tag">Nieuwe werkwijzen</span>
+      </div>
+      <div class="q-meta">
+        <div class="q-meta-block">
+          <h4>Waarom het werkt</h4>
+          <p>Weerstand wordt informatie in plaats van probleem.</p>
+        </div>
+      </div>
+      <div class="q-action"><strong>Wat je daarna doet</strong>Erkennen vóórdat je uitlegt.</div>
+    </div>
+
+    <!-- 9 -->
+    <div class="q-card">
+      <span class="q-number">09</span>
+      <span class="q-type">De toekomstvraag</span>
+      <p class="q-question">Hoe ziet een goede werkdag er voor jou uit?</p>
+      <div class="tags">
+        <span class="tag">Coaching</span>
+        <span class="tag">Motivatie</span>
+        <span class="tag">Teamontwikkeling</span>
+      </div>
+      <div class="q-meta">
+        <div class="q-meta-block">
+          <h4>Waarom het werkt</h4>
+          <p>Helpt iemand richting en motivatie te verwoorden.</p>
+        </div>
+      </div>
+      <div class="q-action"><strong>Wat je daarna doet</strong>Zoek overlap met organisatiedoelen.</div>
+    </div>
+
+    <!-- 10 -->
+    <div class="q-card">
+      <span class="q-number">10</span>
+      <span class="q-type">De reflectievraag</span>
+      <p class="q-question">Wat had ik als leidinggevende anders kunnen doen?</p>
+      <div class="tags">
+        <span class="tag">Evaluaties</span>
+        <span class="tag">Na moeilijke situaties</span>
+        <span class="tag">Periodieke reflectie</span>
+      </div>
+      <div class="q-meta">
+        <div class="q-meta-block">
+          <h4>Waarom het werkt</h4>
+          <p>Doorbreekt hiërarchie en bouwt vertrouwen. Toont kwetsbaarheid als kracht.</p>
+        </div>
+      </div>
+      <div class="q-action"><strong>Wat je daarna doet</strong>Niet uitleggen. Alleen ontvangen.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUICK START -->
+<section class="quickstart">
+  <div class="quickstart-inner">
+    <span class="overline">Quick-start actie</span>
+    <h2>Kies morgen<br><em>één vraag.</em></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <p>Kies één vraag uit deze lijst — niet drie, niet vijf. Eén.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <p>Stel hem zonder agenda. Luister zonder oplossing klaar te hebben.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <p>Noteer wat je verrast. Dat is vaak het begin van echte beweging.</p>
+      </div>
+    </div>
+    <p class="closing-quote">"Verandering start niet met een plan. Het start met één moment van echte aandacht."</p>
+  </div>
+</section>
+
+<!-- WHAT'S NEXT -->
+<section class="whatsnext">
+  <div>
+    <h2>Wil je verder verdiepen?</h2>
+    <p>Deze vragen openen gesprekken. Maar de echte impact zit in wat je daarna doet.</p>
+    <p>Als je wilt werken aan duurzame verandering in je team of organisatie, kan ik met je meedenken.</p>
+    <div class="final-cta">
+      <p>Begin hier. Met één vraag. Één gesprek.<em>Dat is waar verandering start.</em></p>
+    </div>
+  </div>
+  <div class="whatsnext-items">
+    <div class="whatsnext-item">
+      <div class="whatsnext-item-icon">→</div>
+      <div>
+        <h3>Gesprekken voeren bij weerstand</h3>
+        <p>Leer omgaan met emotie, stilte en verzet in moeilijke situaties.</p>
+      </div>
+    </div>
+    <div class="whatsnext-item">
+      <div class="whatsnext-item-icon">→</div>
+      <div>
+        <h3>Teams begeleiden door verandering</h3>
+        <p>Zorg dat transities landen — met draagvlak en energie.</p>
+      </div>
+    </div>
+    <div class="whatsnext-item">
+      <div class="whatsnext-item-icon">→</div>
+      <div>
+        <h3>Psychologische veiligheid versterken</h3>
+        <p>Bouw een cultuur waarin mensen durven spreken.</p>
+      </div>
+    </div>
+    <div class="whatsnext-item">
+      <div class="whatsnext-item-icon">→</div>
+      <div>
+        <h3>Leiderschap vanuit verbinding</h3>
+        <p>Ontwikkel een leiderschapsstijl die vertrouwen én resultaat oplevert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
