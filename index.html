@@ -31,11 +31,13 @@
   /* ── COVER ── */
   .cover {
     min-height: 100vh;
+    min-height: 100svh;
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: relative;
     overflow: hidden;
     page-break-after: always;
+    break-after: page;
   }
 
   .cover-left {
@@ -106,13 +108,13 @@
 
   .cover-bottom {
     font-size: 12px;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.6);
     letter-spacing: 1px;
     position: relative;
     z-index: 3;
   }
 
-  .cover-right h2 {
+  .cover-right .cover-quote {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
     font-weight: 400;
@@ -148,6 +150,7 @@
     gap: 80px;
     align-items: center;
     page-break-after: always;
+    break-after: page;
   }
 
   .intro-left h2 {
@@ -237,11 +240,7 @@
     padding: 40px;
     position: relative;
     overflow: hidden;
-    transition: all 0.2s;
-  }
-
-  .q-card:hover {
-    background: #fafaf8;
+    transition: background-color 0.2s;
   }
 
   .q-card::before {
@@ -253,11 +252,18 @@
     background: var(--accent);
     transform: scaleY(0);
     transform-origin: bottom;
-    transition: transform 0.3s ease;
   }
 
-  .q-card:hover::before {
-    transform: scaleY(1);
+  @media (hover: hover) {
+    .q-card:hover {
+      background: #fafaf8;
+    }
+    .q-card::before {
+      transition: transform 0.3s ease;
+    }
+    .q-card:hover::before {
+      transform: scaleY(1);
+    }
   }
 
   .q-number {
@@ -295,14 +301,14 @@
     content: '"';
     color: var(--accent);
     font-size: 32px;
-    line-height: 0;
-    vertical-align: -12px;
+    line-height: 1;
+    vertical-align: -0.4em;
     margin-right: 4px;
   }
 
   .q-meta {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 16px;
     margin-bottom: 20px;
   }
@@ -365,6 +371,7 @@
     background: var(--ink);
     padding: 80px 100px;
     page-break-before: always;
+    break-before: page;
   }
 
   .quickstart-inner {
@@ -528,10 +535,11 @@
   /* ── PRINT ── */
   @media print {
     body { background: white; }
-    .cover { page-break-after: always; }
-    .intro { page-break-after: always; }
-    .questions-grid { page-break-inside: avoid; }
-    .q-card { page-break-inside: avoid; }
+    .cover { page-break-after: always; break-after: page; }
+    .intro { page-break-after: always; break-after: page; }
+    .quickstart { page-break-before: always; break-before: page; }
+    .questions-grid { page-break-inside: avoid; break-inside: avoid; }
+    .q-card { page-break-inside: avoid; break-inside: avoid; }
   }
 
   @media (max-width: 800px) {
@@ -550,7 +558,7 @@
 <!-- COVER -->
 <section class="cover">
   <div class="cover-left">
-    <span class="cover-number">10</span>
+    <span class="cover-number" aria-hidden="true">10</span>
     <span class="cover-label">Voor managers &amp; leidinggevenden</span>
     <h1 class="cover-title">
       Gespreks&shy;<em>openers</em><br>die echt<br>werken
@@ -558,7 +566,7 @@
     <p class="cover-bottom">Vertrouwen · Verbinding · Beweging</p>
   </div>
   <div class="cover-right">
-    <h2>"Echte beweging ontstaat in gesprekken waar iemand zich gezien voelt."</h2>
+    <p class="cover-quote">"Echte beweging ontstaat in gesprekken waar iemand zich gezien voelt."</p>
     <p>De meeste gesprekken op de werkvloer zijn functioneel. Kort. Taakgericht. Efficiënt.</p>
     <p>Maar wat als één vraag het verschil maakt?</p>
     <p>Deze 10 gespreksopeners zijn niet uit theorie ontstaan — maar uit moeilijke gesprekken. Stiltes. Weerstand. Doorbraken.</p>
@@ -575,7 +583,7 @@
   </div>
   <div class="intro-right">
     <h3>Elke opener bevat</h3>
-    <ul class="intro-list">
+    <ul class="intro-list" role="list">
       <li>De exacte vraag die je kunt stellen</li>
       <li>Waarom deze vraag psychologisch werkt</li>
       <li>De juiste context en momenten om hem te gebruiken</li>
@@ -609,7 +617,7 @@
           <p>Mensen verwachten deze vraag niet zonder agenda. Het vertraagt het gesprek en nodigt uit tot eerlijkheid.</p>
         </div>
       </div>
-      <div class="q-action"><strong>Wat je daarna doet</strong>Stilte laten vallen. Niet oplossen. Alleen luisteren.</div>
+      <div class="q-action"><strong>Wat je daarna doet</strong> Stilte laten vallen. Niet oplossen. Alleen luisteren.</div>
     </div>
 
     <!-- 2 -->
@@ -628,7 +636,7 @@
           <p>Energieverlies is vaak de échte oorzaak achter verzuim en frustratie.</p>
         </div>
       </div>
-      <div class="q-action"><strong>Wat je daarna doet</strong>Doorvragen met: "Wat zou het 10% lichter maken?"</div>
+      <div class="q-action"><strong>Wat je daarna doet</strong> Doorvragen met: "Wat zou het 10% lichter maken?"</div>
     </div>
 
     <!-- 3 -->
@@ -647,7 +655,7 @@
           <p>Teams praten zelden over wat goed gaat. Verschuift focus naar eigenaarschap.</p>
         </div>
       </div>
-      <div class="q-action"><strong>Wat je daarna doet</strong>Succes expliciet benoemen. Klein houden. Echt maken.</div>
+      <div class="q-action"><strong>Wat je daarna doet</strong> Succes expliciet benoemen. Klein houden. Echt maken.</div>
     </div>
 
     <!-- 4 -->
@@ -666,7 +674,7 @@
           <p>Onuitgesproken irritaties worden cultuurproblemen. Normaliseert frictie.</p>
         </div>
       </div>
-      <div class="q-action"><strong>Wat je daarna doet</strong>Niet verdedigen. Samenvatten. Bedanken.</div>
+      <div class="q-action"><strong>Wat je daarna doet</strong> Niet verdedigen. Samenvatten. Bedanken.</div>
     </div>
 
     <!-- 5 -->
@@ -685,7 +693,7 @@
           <p>Laat zien dat iemand meer is dan zijn functie. Versterkt autonomie.</p>
         </div>
       </div>
-      <div class="q-action"><strong>Wat je daarna doet</strong>Eén kleine stap concreet maken.</div>
+      <div class="q-action"><strong>Wat je daarna doet</strong> Eén kleine stap concreet maken.</div>
     </div>
 
     <!-- 6 -->
@@ -704,7 +712,7 @@
           <p>Vergroot zelfinzicht en voorkomt escalatie.</p>
         </div>
       </div>
-      <div class="q-action"><strong>Wat je daarna doet</strong>Samen signalen benoemen en vastleggen.</div>
+      <div class="q-action"><strong>Wat je daarna doet</strong> Samen signalen benoemen en vastleggen.</div>
     </div>
 
     <!-- 7 -->
@@ -723,7 +731,7 @@
           <p>Psychologische veiligheid wordt concreet en bespreekbaar.</p>
         </div>
       </div>
-      <div class="q-action"><strong>Wat je daarna doet</strong>Patronen teruggeven aan het team.</div>
+      <div class="q-action"><strong>Wat je daarna doet</strong> Patronen teruggeven aan het team.</div>
     </div>
 
     <!-- 8 -->
@@ -742,7 +750,7 @@
           <p>Weerstand wordt informatie in plaats van probleem.</p>
         </div>
       </div>
-      <div class="q-action"><strong>Wat je daarna doet</strong>Erkennen vóórdat je uitlegt.</div>
+      <div class="q-action"><strong>Wat je daarna doet</strong> Erkennen vóórdat je uitlegt.</div>
     </div>
 
     <!-- 9 -->
@@ -761,7 +769,7 @@
           <p>Helpt iemand richting en motivatie te verwoorden.</p>
         </div>
       </div>
-      <div class="q-action"><strong>Wat je daarna doet</strong>Zoek overlap met organisatiedoelen.</div>
+      <div class="q-action"><strong>Wat je daarna doet</strong> Zoek overlap met organisatiedoelen.</div>
     </div>
 
     <!-- 10 -->
@@ -780,7 +788,7 @@
           <p>Doorbreekt hiërarchie en bouwt vertrouwen. Toont kwetsbaarheid als kracht.</p>
         </div>
       </div>
-      <div class="q-action"><strong>Wat je daarna doet</strong>Niet uitleggen. Alleen ontvangen.</div>
+      <div class="q-action"><strong>Wat je daarna doet</strong> Niet uitleggen. Alleen ontvangen.</div>
     </div>
 
   </div>
