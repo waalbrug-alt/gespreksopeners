@@ -545,11 +545,38 @@
   @media (max-width: 800px) {
     .cover, .intro, .whatsnext { grid-template-columns: 1fr; }
     .cover-left::after { display: none; }
+    .cover { min-height: auto; }
+    .cover-left { padding: 60px 40px; min-height: 60vh; }
     .cover-right { padding: 60px 40px; }
-    .cover-left { padding: 60px 40px; }
+    .cover-title { font-size: 40px; }
+    .cover-right p { max-width: 100%; }
+    .intro-left h2 { font-size: 32px; }
+    .section-header h2 { font-size: 30px; }
+    .quickstart h2 { font-size: 36px; }
+    .whatsnext h2 { font-size: 30px; }
     .questions-grid { grid-template-columns: 1fr; }
     .steps { grid-template-columns: 1fr; }
     .questions-section, .quickstart, .intro, .whatsnext { padding: 60px 32px; }
+  }
+
+  @media (max-width: 480px) {
+    .cover-left { padding: 48px 20px; min-height: 50vh; }
+    .cover-right { padding: 48px 20px; }
+    .cover-title { font-size: 34px; }
+    .cover-number { font-size: 130px; }
+    .cover-right h2 { font-size: 20px; }
+    .intro-left h2 { font-size: 26px; }
+    .intro-right { padding: 24px 20px; }
+    .section-header h2 { font-size: 24px; }
+    .section-header { margin-bottom: 36px; }
+    .q-card { padding: 24px 20px; }
+    .quickstart h2 { font-size: 30px; }
+    .closing-quote { font-size: 18px; }
+    .whatsnext h2 { font-size: 26px; }
+    .final-cta { padding: 28px 20px; }
+    .final-cta p { font-size: 18px; }
+    .whatsnext { gap: 40px; }
+    .questions-section, .quickstart, .intro, .whatsnext { padding: 48px 20px; }
   }
 </style>
 </head>
