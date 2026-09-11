@@ -532,6 +532,139 @@
     font-family: 'DM Sans', sans-serif;
   }
 
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+
+  .filter-btn {
+    background: none;
+    border: 1px solid var(--divider);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 9px 18px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    font-weight: 500;
+    border-radius: 2px;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .q-card.hidden {
+    display: none;
+  }
+
+  .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    font-size: 15px;
+    display: none;
+  }
+
+  .no-results.visible {
+    display: block;
+  }
+
+  /* ── OVER ── */
+  .about {
+    background: var(--ink);
+    padding: 80px 100px;
+  }
+
+  .about-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about .overline {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .about h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .about p {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+
+  .about-cta-box {
+    background: rgba(255,255,255,0.06);
+    padding: 40px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .about-cta-box p {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .about-cta-box .sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 28px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 14px 28px;
+    transition: background 0.2s;
+  }
+
+  @media (hover: hover) {
+    .cta-btn:hover { background: #a83316; }
+  }
+
   /* ── PRINT ── */
   @media print {
     body { background: white; }
@@ -543,7 +676,7 @@
   }
 
   @media (max-width: 800px) {
-    .cover, .intro, .whatsnext { grid-template-columns: 1fr; }
+    .cover, .intro, .whatsnext, .about-inner { grid-template-columns: 1fr; }
     .cover-left::after { display: none; }
     .cover { min-height: auto; }
     .cover-left { padding: 60px 40px; min-height: 60vh; }
@@ -554,6 +687,9 @@
     .section-header h2 { font-size: 30px; }
     .quickstart h2 { font-size: 36px; }
     .whatsnext h2 { font-size: 30px; }
+    .about h2 { font-size: 28px; }
+    .about { padding: 60px 32px; }
+    .about-cta-box p { font-size: 18px; }
     .questions-grid { grid-template-columns: 1fr; }
     .steps { grid-template-columns: 1fr; }
     .questions-section, .quickstart, .intro, .whatsnext { padding: 60px 32px; }
@@ -577,6 +713,10 @@
     .final-cta p { font-size: 18px; }
     .whatsnext { gap: 40px; }
     .questions-section, .quickstart, .intro, .whatsnext { padding: 48px 20px; }
+    .about { padding: 48px 20px; }
+    .about h2 { font-size: 24px; }
+    .about-cta-box { padding: 24px 20px; }
+    .about-cta-box p { font-size: 16px; }
   }
 </style>
 </head>
@@ -626,10 +766,20 @@
     <h2>Kies er één. Begin vandaag.</h2>
   </div>
 
+  <div class="filter-bar" role="group" aria-label="Filter op situatie">
+    <button class="filter-btn active" data-cat="alle">Alle vragen</button>
+    <button class="filter-btn" data-cat="1op1">1-op-1 gesprek</button>
+    <button class="filter-btn" data-cat="team">Teamoverleg</button>
+    <button class="filter-btn" data-cat="verandering">Verandering</button>
+    <button class="filter-btn" data-cat="moeilijk">Moeilijke situatie</button>
+    <button class="filter-btn" data-cat="reflectie">Reflectie</button>
+  </div>
+
   <div class="questions-grid">
+    <p class="no-results" id="no-results">Geen vragen gevonden voor deze situatie.</p>
 
     <!-- 1 -->
-    <div class="q-card">
+    <div class="q-card" data-cat="1op1 moeilijk">
       <span class="q-number">01</span>
       <span class="q-type">De check-in vraag</span>
       <p class="q-question">Hoe gaat het écht met je vandaag?</p>
@@ -648,7 +798,7 @@
     </div>
 
     <!-- 2 -->
-    <div class="q-card">
+    <div class="q-card" data-cat="1op1 moeilijk">
       <span class="q-number">02</span>
       <span class="q-type">De betekenisvraag</span>
       <p class="q-question">Wat kost je momenteel de meeste energie in je werk?</p>
@@ -667,7 +817,7 @@
     </div>
 
     <!-- 3 -->
-    <div class="q-card">
+    <div class="q-card" data-cat="team 1op1 reflectie">
       <span class="q-number">03</span>
       <span class="q-type">De waarderingsvraag</span>
       <p class="q-question">Waar ben je de afgelopen week trots op?</p>
@@ -686,7 +836,7 @@
     </div>
 
     <!-- 4 -->
-    <div class="q-card">
+    <div class="q-card" data-cat="team moeilijk reflectie">
       <span class="q-number">04</span>
       <span class="q-type">De frictievraag</span>
       <p class="q-question">Wat irriteert je momenteel, maar spreek je niet uit?</p>
@@ -705,7 +855,7 @@
     </div>
 
     <!-- 5 -->
-    <div class="q-card">
+    <div class="q-card" data-cat="1op1 reflectie">
       <span class="q-number">05</span>
       <span class="q-type">De ontwikkelvraag</span>
       <p class="q-question">Wat wil je dit jaar leren dat we nog niet bespreken?</p>
@@ -724,7 +874,7 @@
     </div>
 
     <!-- 6 -->
-    <div class="q-card">
+    <div class="q-card" data-cat="1op1 moeilijk">
       <span class="q-number">06</span>
       <span class="q-type">De signaalvraag</span>
       <p class="q-question">Wanneer merk jij dat het minder goed met je gaat op werk?</p>
@@ -743,7 +893,7 @@
     </div>
 
     <!-- 7 -->
-    <div class="q-card">
+    <div class="q-card" data-cat="team moeilijk">
       <span class="q-number">07</span>
       <span class="q-type">De teamvraag</span>
       <p class="q-question">Wat helpt jou om je veilig te voelen in dit team?</p>
@@ -762,7 +912,7 @@
     </div>
 
     <!-- 8 -->
-    <div class="q-card">
+    <div class="q-card" data-cat="verandering moeilijk">
       <span class="q-number">08</span>
       <span class="q-type">De veranderingsvraag</span>
       <p class="q-question">Wat maakt deze verandering lastig voor jou?</p>
@@ -781,7 +931,7 @@
     </div>
 
     <!-- 9 -->
-    <div class="q-card">
+    <div class="q-card" data-cat="1op1 team">
       <span class="q-number">09</span>
       <span class="q-type">De toekomstvraag</span>
       <p class="q-question">Hoe ziet een goede werkdag er voor jou uit?</p>
@@ -800,7 +950,7 @@
     </div>
 
     <!-- 10 -->
-    <div class="q-card">
+    <div class="q-card" data-cat="1op1 team reflectie">
       <span class="q-number">10</span>
       <span class="q-type">De reflectievraag</span>
       <p class="q-question">Wat had ik als leidinggevende anders kunnen doen?</p>
@@ -841,6 +991,23 @@
       </div>
     </div>
     <p class="closing-quote">"Verandering start niet met een plan. Het start met één moment van echte aandacht."</p>
+  </div>
+</section>
+
+<!-- OVER -->
+<section class="about">
+  <div class="about-inner">
+    <div>
+      <span class="overline">Over deze vragen</span>
+      <h2>Gebouwd op echte gesprekken</h2>
+      <p>Deze 10 gespreksopeners zijn niet uit een boek gekomen. Ze zijn ontstaan in echte gesprekken — met teams die vastzaten, managers die het moeilijk hadden, en situaties die vroegen om meer dan een goed argument.</p>
+      <p>Ik werk met leidinggevenden die willen groeien in verbinding: niet door harder te pushen, maar door anders te luisteren. Met aandacht voor vertrouwen, veiligheid en duurzame beweging.</p>
+    </div>
+    <div class="about-cta-box">
+      <p>"Wil je verder gaan dan één vraag?"</p>
+      <p class="sub">Ik help managers en teams met gesprekken die écht verschil maken — in coaching, teamontwikkeling en verandertrajecten.</p>
+      <a href="mailto:" class="cta-btn">Stuur een bericht</a>
+    </div>
   </div>
 </section>
 
@@ -886,5 +1053,27 @@
   </div>
 </section>
 
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.q-card');
+  const noResults = document.getElementById('no-results');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      let visible = 0;
+      cards.forEach(card => {
+        const matches = cat === 'alle' || card.dataset.cat.split(' ').includes(cat);
+        card.classList.toggle('hidden', !matches);
+        if (matches) visible++;
+      });
+
+      noResults.classList.toggle('visible', visible === 0);
+    });
+  });
+</script>
 </body>
 </html>
