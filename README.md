@@ -13,3 +13,11 @@
 
 Broncode staat in `boardroomcoach/src/`. Na wijzigingen: `python3 boardroomcoach/build.py`.
 Alle bedrijven en cijfers in de oefeningen zijn fictief. De app is een leercoach, geen advies.
+
+## Android-app (APK)
+
+`boardroomcoach/android/Boardroomcoach.apk` is een installeerbare Android-app (Android 7.0 of nieuwer). Je voortgang blijft op je telefoon bewaard, ook na afsluiten of herstarten, en de app werkt zonder internet.
+
+**Installeren:** download de APK op je telefoon (op GitHub: open het bestand en tik op *Download raw file*), open het bestand en sta zo nodig *Installeren uit onbekende bronnen* toe voor je browser of bestandsbeheer. Google Play Protect kan een waarschuwing geven omdat de app niet uit de Play Store komt; kies dan *Toch installeren*.
+
+**Bouwen:** `python3 boardroomcoach/android/build_apk.py --tools <map met jars> --keystore <sleutel.p12> --storepass <wachtwoord> --version-code N`. Zie de toelichting bovenin het script. Gebruik voor updates altijd dezelfde sleutel; anders moet je de app eerst verwijderen (zet dan eerst je voortgang veilig via *Voortgang → Profiel en instellingen → Kopieer reservecode*).

@@ -92,13 +92,22 @@ function load() {
     const raw = localStorage.getItem(STORE_KEY);
     if (raw) S = Object.assign(freshState(), JSON.parse(raw));
   } catch (e) { /* geen opslag beschikbaar: we starten leeg */ }
+  // Android-app: voortgang staat ook in de app-opslag van het toestel
+  try {
+    if (window.AndroidStore) {
+      const raw2 = window.AndroidStore.load();
+      if (raw2) { const d = JSON.parse(raw2); if ((d.updatedAt || 0) > (S.updatedAt || 0)) S = Object.assign(freshState(), d); }
+    }
+  } catch (e) { }
   TOPICS.forEach(t => { if (!S.topics[t.id]) S.topics[t.id] = { skill: 40, start: null, n: 0, hist: [] }; });
 }
 let saveTimer = null;
 function save() {
   S.updatedAt = Date.now();
   if (S.history.length > 150) S.history = S.history.slice(-150);
-  try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch (e) { /* stil */ }
+  const json = JSON.stringify(S);
+  try { localStorage.setItem(STORE_KEY, json); } catch (e) { /* stil */ }
+  try { if (window.AndroidStore) window.AndroidStore.save(json); } catch (e) { }
   clearTimeout(saveTimer);
   saveTimer = setTimeout(cloudSave, 2500);
 }

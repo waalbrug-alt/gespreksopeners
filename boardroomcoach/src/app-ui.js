@@ -711,7 +711,7 @@ Views.settings = () => {
       <div><button class="btn sm" data-act="saveRole">Opslaan</button></div></div>` : ''}
     ${AI.sample ? `<div class="card stack-sm"><h2>Beoordeling met Claude</h2><p class="small">Open antwoorden en oefengesprekken kunnen door Claude worden beoordeeld. Dat gebruikt je eigen Claude-tegoed. Zonder Claude krijg je een indicatieve score met zelfcontrole.</p><div class="seg" role="group" aria-label="Beoordeling met Claude"><button type="button" data-act="aiSet" data-arg="on" aria-pressed="${!AI.off}">Aan</button><button type="button" data-act="aiSet" data-arg="off" aria-pressed="${AI.off}">Uit</button></div></div>` : ''}
     <div class="card stack"><h2>Voortgang bewaren of overzetten</h2>
-      <p class="small">Je voortgang wordt in deze browser bewaard${Cloud.ready ? ' en in je Claude-account' : ''}. Kopieer de reservecode om hem veilig te stellen of op een ander apparaat terug te zetten.</p>
+      <p class="small">Je voortgang wordt ${window.AndroidStore ? 'op dit toestel in de app' : 'in deze browser'} bewaard${Cloud.ready ? ' en in je Claude-account' : ''}. Kopieer de reservecode om hem veilig te stellen of op een ander apparaat terug te zetten.</p>
       <div class="row"><button class="btn sm secondary" data-act="export">Kopieer reservecode</button></div>
       <label class="field" for="imp">Reservecode terugzetten<textarea id="imp" style="min-height:90px" placeholder="Plak hier je reservecode"></textarea></label>
       <div><button class="btn sm" data-act="import">Zet terug</button></div></div>
@@ -751,7 +751,7 @@ const Actions = {
   setFocus: (a) => { const p = S.profile || (S.profile = {}); const f = p.focus || (p.focus = []); const i = f.indexOf(a); i >= 0 ? f.splice(i, 1) : f.push(a); save(); App.render(); },
   saveRole: () => { const v = $('#st-role').value.trim(); S.profile = Object.assign(S.profile || {}, { role: v }); save(); toast('Opgeslagen.'); },
   aiSet: (a) => { AI.off = a === 'off'; App.render(); },
-  export: async () => { const code = btoa(unescape(encodeURIComponent(JSON.stringify(S)))); try { await navigator.clipboard.writeText(code); toast('Reservecode gekopieerd. Bewaar hem op een veilige plek.'); } catch (e) { const t = $('#imp'); t.value = code; t.select(); toast('Kopiëren lukte niet automatisch; de code staat geselecteerd in het tekstvak.'); } },
+  export: async () => { const code = btoa(unescape(encodeURIComponent(JSON.stringify(S)))); if (window.AndroidStore && window.AndroidStore.copy) { try { window.AndroidStore.copy(code); toast('Reservecode gekopieerd. Bewaar hem op een veilige plek.'); return; } catch (e) { } } try { await navigator.clipboard.writeText(code); toast('Reservecode gekopieerd. Bewaar hem op een veilige plek.'); } catch (e) { const t = $('#imp'); t.value = code; t.select(); toast('Kopiëren lukte niet automatisch; de code staat geselecteerd in het tekstvak.'); } },
   import: () => { const v = $('#imp').value.trim(); try { const obj = JSON.parse(decodeURIComponent(escape(atob(v)))); if (!obj || !obj.topics) throw new Error(); S = Object.assign(freshState(), obj); save(); toast('Voortgang teruggezet.'); App.go(S.onboarded ? 'home' : 'welcome'); } catch (e) { toast('Deze code werd niet herkend. Controleer of je hem volledig hebt geplakt.'); } },
   askReset: () => App.go('settings', { confirmReset: true }),
   reset: () => { S = freshState(); save(); App.sess = null; App.go('welcome'); toast('Alles is gewist.'); }
@@ -799,6 +799,14 @@ pickNext = function (sess) {
     return r;
   }
   return _pickNext(sess);
+};
+
+/* ---- terugknop in de Android-app ---- */
+window.__back = function () {
+  if (App.view === 'session' && App.sess && App.sess.mode === 'nm') return true; // nulmeting niet per ongeluk verlaten
+  if (App.view === 'home' || App.view === 'welcome') return false;
+  if (App.view === 'session' && App.sess && App.sess.results.length) { Actions.quitSess(); return true; }
+  App.go(S.onboarded ? 'home' : 'welcome'); return true;
 };
 
 /* ---- start ---- */
